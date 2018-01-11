@@ -1,0 +1,20 @@
+<ng-container *ngIf="!photo">
+    Загружаем...
+</ng-container>
+
+<div class="single-photo-block" *ngIf="photo">
+    <div class="single-photo-image">
+        <img src="{{photo.imageUrl}}" alt=" ">
+    </div>
+
+    <div class="single-photo-info">
+        <div class="likes-block">
+            Нравится: <b>{{photo.likes}}</b>
+        </div>
+    </div>
+</div>
+
+<div class="nav-btn-holder">
+    <button (click)="goBack()" class="btn">Вернуться к списку</button>
+    <a routerLink="/" class="btn">Начать новый поиск</a>
+</div>

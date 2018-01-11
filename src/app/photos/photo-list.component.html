@@ -1,0 +1,28 @@
+<ng-container *ngIf="!photoList">
+    Загружаем...
+</ng-container>
+
+<div class="photos-holder" *ngIf="photoList">
+    <div class="photos-block-text">
+        Ваши лучшие фотографии:
+    </div>
+
+    <div class="photos-block align-center row clearfix">
+        <div class="col-1-3" *ngFor="let photo of photoList | slice:0:9 | sortBy: 'likes' ">
+            <a routerLink="/photo/{{photo.id}}" class="photo-item">
+                <span class="photo-image">
+                    <img src="{{photo.thumbnailUrl}}" alt=" ">
+                </span>
+                <span class="photo-text">
+                    Подробнее
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="nav-btn-holder">
+    <a routerLink="/" class="btn">Начать новый поиск</a>
+</div>
+
+<!-- TODO: sort -->

@@ -1,0 +1,40 @@
+<div class="about-app align-center">
+    Какие фото в инстаграме набрали больше всего лайков?<br>
+    Узнайте с помощью нашего приложения! Ищите себя и своих друзей!
+</div>
+
+<form class="align-center" #searchForm="ngForm" (ngSubmit)="onSubmit(searchField.value); searchForm.reset()">
+    <div class="form-group">
+        <label for="search-field">
+            <input type="text" id="search-field" name="searchField" required minlength="4" pattern="[a-zA-Z0-9_.]*"
+                   [(ngModel)]="searchInitValue" #searchField="ngModel">
+        </label>
+        <button type="submit" class="btn btn-search" [disabled]="!searchForm.form.valid">
+            Искать
+        </button>
+        <div [hidden]="searchField.valid || searchField.pristine" class="alert-block">
+            <div *ngIf="searchField.errors?.required" class="alert">
+                Введите имя пользователя!
+            </div>
+            <div *ngIf="searchField.errors?.minlength" class="alert">
+                Имя должно быть не короче 4 букв!
+            </div>
+            <div *ngIf="searchField.errors?.pattern" class="alert">
+                Имя может содержать только латинские буквы, точку и нижнее подчёркивание!
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="results-block align-center row clearfix" *ngIf="userList">
+    <div class="col-1-3" *ngFor="let user of userList">
+        <a routerLink="user/{{user.id}}" class="result-item">
+            <span class="result-image">
+                <img src="{{user.profileImageUrl}}" alt=" ">
+            </span>
+            <span class="result-name">
+                {{user.name}}
+            </span>
+        </a>
+    </div>
+</div>
